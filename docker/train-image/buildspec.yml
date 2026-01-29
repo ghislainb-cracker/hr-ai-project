@@ -1,0 +1,30 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Install phase OK"
+  
+  pre_build:
+    commands:
+      - echo "Logging in to target ECR ($ACCOUNT_ID)..."
+      - REPO_URI="$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME"
+      - IMAGE_TAG=$(echo $CODEBUILD_BUILD_ID | tr ':' '-')
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin "$REPO_URI"
+      - echo "Logging in to AWS Public ECR (for base image)..."
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 763104351884.dkr.ecr.us-east-1.amazonaws.com
+      
+  build:
+    commands:
+      - echo "Building the Docker image..."
+      - docker build --build-arg BASE_IMAGE=$BASE_IMAGE -t $REPO_URI:$IMAGE_TAG -f docker/train-image/Dockerfile .
+
+  post_build:
+    commands:
+      - echo "Pushing image to $REPO_URI:$IMAGE_TAG"
+      - docker push $REPO_URI:$IMAGE_TAG
+      - echo "Tagging $REPO_URI:$IMAGE_TAG as $REPO_URI:latest"
+      - docker tag $REPO_URI:$IMAGE_TAG $REPO_URI:latest
+      - docker push $REPO_URI:latest
+      - echo "Build complete. Use this ECR URI in your SageMaker notebook:"
+      - echo $REPO_URI:$IMAGE_TAG

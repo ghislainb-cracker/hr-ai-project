@@ -1,0 +1,23 @@
+# These are the *exact* versions known to support QLoRA + FSDP.
+# This file solves "unexpected keyword argument" (5.1) errors.
+
+# Transformers 4.44.2+ is required for the latest FSDP integrations
+transformers==4.44.2
+
+# PEFT 0.13.0+ is required
+peft==0.13.0
+
+# TRL 0.11.4+ is required
+trl==0.11.4
+
+# Bitsandbytes 0.43.3+ is required for 4-bit and FSDP
+bitsandbytes==0.43.3
+
+# Accelerate 1.0.1+ is required
+accelerate==0.32.1
+
+# Datasets library for loading
+datasets==2.20.0
+
+# For logging
+wandb

